@@ -159,8 +159,7 @@ def update_room():
             print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
         else:
             print(f"Room {room_id} Full.")
-            show_patient()
-            show_room()
+        show_room()
     else:
         print(f'{index} Not Found')
     
