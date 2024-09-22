@@ -125,66 +125,92 @@ def admin_2():
 def update_name():
     show_patient()
     index = int(input('Input Index you want edit: '))
-    name = input('New Name of patients :')
-    old_name = patient[index]['name']
-    patient[index]['name'] = name.capitalize()
-    if index < 10:
-        patient_id = name[:3] + str(0) + str(index)
+    if index in patient:
+        name = input('New Name of patients :')
+        old_name = patient[index]['name']
+        patient[index]['name'] = name.capitalize()
+        if index < 10:
+            patient_id = name[:3] + str(0) + str(index)
+        else:
+            patient_id = name[:3] + str(index)
+        patient[index]['patient_id'] = patient_id.capitalize()
+        room_id = patient[index]['room_id']
+        if room_id and old_name in rooms[room_id]['occupants']:
+            occupant_index = rooms[room_id]['occupants'].index(old_name)
+            rooms[room_id]['occupants'][occupant_index] = name.capitalize()
+        print(f"Patient Name with ID {index} Updated to be {name}.")
+        show_patient()
     else:
-        patient_id = name[:3] + str(index)
-    patient[index]['patient_id'] = patient_id.capitalize()
-    room_id = patient[index]['room_id']
-    if room_id and old_name in rooms[room_id]['occupants']:
-        occupant_index = rooms[room_id]['occupants'].index(old_name)
-        rooms[room_id]['occupants'][occupant_index] = name.capitalize()
-    print(f"Patient Name with ID {index} Updated to be {name}.")
+        print(f'{index} Not Found')
+    
 
 def update_room():
     show_patient()
     show_room()
     index = int(input('Input Index you want edit: '))
-    room_id = int(input('update room id : '))
-    current_room_id = patient[index]['room_id']
-    if current_room_id:
-        rooms[current_room_id]['occupants'].remove(patient[index]['name'])
-    if len(rooms[room_id]['occupants']) < rooms[room_id]['max_capacity']:
-        patient[index]['room_id'] = room_id
-        rooms[room_id]['occupants'].append(patient[index]['name'])
-        print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
+    if index in patient:
+        room_id = int(input('update room id : '))
+        current_room_id = patient[index]['room_id']
+        if current_room_id:
+            rooms[current_room_id]['occupants'].remove(patient[index]['name'])
+        if len(rooms[room_id]['occupants']) < rooms[room_id]['max_capacity']:
+            patient[index]['room_id'] = room_id
+            rooms[room_id]['occupants'].append(patient[index]['name'])
+            print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
+        else:
+            print(f"Room {room_id} Full.")
+            show_patient()
+            show_room()
     else:
-        print(f"Room {room_id} Full.")
+        print(f'{index} Not Found')
+    
 
 def update_status():
     show_patient()
     index = int(input('Input Index you want edit: '))
-    status = input('New Status of patients :')
-    patient[index]['status'] = status.capitalize()
-    print(f"status patient with Name {patient[index]['name']} Updated to be {status}.")
+    if index in patient:
+        status = input('New Status of patients :')
+        patient[index]['status'] = status.capitalize()
+        print(f"status patient with Name {patient[index]['name']} Updated to be {status}.")
+        show_patient()
+    else:
+        print(f'{index} Not Found')
+    
 
 def update_disease():
     show_patient()
     index = int(input('Input Index you want edit: '))
-    disease = input('New Disease of patients :')
-    patient[index]['disease'] = disease.capitalize()
-    print(f"disease patient with Nama {patient[index]['name']} Updated to be {disease}.")
+    if index in patient:
+        disease = input('New Disease of patients :')
+        patient[index]['disease'] = disease.capitalize()
+        print(f"disease patient with Nama {patient[index]['name']} Updated to be {disease}.")
+        show_patient()
+    else:
+        print(f'{index} not found')
+    
 
 def update_class():
     show_room()
     index = int(input('index room: '))
-    if rooms[index]['occupants']:
-            print(f"can\'t update class Room {index}, still any occupants.")
-    else:
-        room_class_up = input('nama kelas : ')
-        rooms[index]['class'] = room_class_up
-        kapasitas = 0
-        if room_class_up == 'vvip':
-            kapasitas+=2
-        elif room_class_up == 'vip':
-            kapasitas += 4
+    if index in rooms:
+        if rooms[index]['occupants']:
+                print(f"can\'t update class Room {index}, still any occupants.")
         else:
-            kapasitas+=6
-        rooms[index]['max_capacity'] = kapasitas
-        print(f"Class Room {index} Success Updated to be {room_class_up} and The capacity is {kapasitas}.")
+            room_class_up = input('nama kelas : ')
+            rooms[index]['class'] = room_class_up
+            kapasitas = 0
+            if room_class_up == 'vvip':
+                kapasitas+=2
+            elif room_class_up == 'vip':
+                kapasitas += 4
+            else:
+                kapasitas+=6
+            rooms[index]['max_capacity'] = kapasitas
+            print(f"Class Room {index} Success Updated to be {room_class_up} and The capacity is {kapasitas}.")
+            show_room()
+    else:
+        print(f'{index} Not Found')
+    
 
 
 def admin_3():
@@ -221,12 +247,20 @@ def reset_patient_index():
     print("Index pasien telah diatur ulang.")
     show_patient()
 
+def reset_rooms_index():
+    global rooms
+    rooms = {i+1: info for i, (idx, info) in enumerate(rooms.items())}
+    print("Index rooms telah diatur ulang.")
+    show_room()
+
 def delete_patient():
     show_patient()
     index = int(input('index patient : '))
-    room_id = patient[index]['room_id']
-    if room_id:
-        rooms[room_id]['occupants'].remove(patient[index]['name'])
+    if index in patient:
+        room_id = patient[index]['room_id']
+        if room_id != 0:
+            if patient[index]['name'] in rooms[room_id]['occupants']:
+                rooms[room_id]['occupants'].remove(patient[index]['name'])
         del patient[index]
         print(f"Patient with ID {index} Deleted.")
     else:
@@ -241,6 +275,7 @@ def delete_rooms():
     else:
         del rooms[index]
         print(f"Room with ID {index} deleted.")
+    reset_rooms_index()
 
 def admin_4():
     print('Delete Menu')
