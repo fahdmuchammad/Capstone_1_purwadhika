@@ -27,6 +27,7 @@ def show_patient():
         status = info['status']
         print(f'{index}\t{name}\t{room}\t{patientid}\t{disease:>10}\t{status}\t')
     print('------------------------------------------------------')
+
 def show_room():
     print('Index\tClass\tMax_capacity\tOccupants\t')
     for index ,room_info in rooms.items():
@@ -35,6 +36,7 @@ def show_room():
         room_fill = room_info['occupants']
         print(f'{index}\t{room_name}\t{rom_max:>10}\t{room_fill}\t')
     print('------------------------------------------------------')
+
 def find_patient():
     print('YOU ONLY CAN FILTER NAME OF THE PATIENT')
     print('Patient Name : ')
@@ -48,6 +50,7 @@ def find_patient():
     else:
         print(f'No data have name : {patient_nama}')
     print('------------------------------------------------------')
+
 def sorted_patient():
     print('you wanna sort by? name/disease/room_id/status')
     sort_dcd = input('sorted!')
@@ -60,6 +63,7 @@ def sorted_patient():
         status = info['status']
         print(f'{index}\t{name}\t{room}\t{patientid}\t{disease:>10}\t{status}\t')
     print('------------------------------------------------------')
+
 def add_patient():
     pat_id = len(patient)+1
     name = input('nama patient : ')
@@ -69,6 +73,7 @@ def add_patient():
     patient[pat_id] = {"name": name.capitalize(), "room_id": 0,"patient_id":patient_id.capitalize(),"disease":penyakit.capitalize(),"status":kondisi.capitalize()}
     print(f"Patient {name} with ID {pat_id} Success added.")
     show_patient()
+
 def add_room():
     room_id = len(rooms)+1
     room_class = input('nama kelas : ')
@@ -82,6 +87,7 @@ def add_room():
     rooms[room_id] = {"class":room_class,"max_capacity": kapasitas, "occupants": []}
     print(f"New Room with class {room_class} with ID {room_id} Success added.")
     show_room()
+
 def admin_1():
     print('What you wanna add?')
     print('1. ADD patient')
@@ -94,6 +100,7 @@ def admin_1():
         elif menu_add == 2:
             add_room()
         menu_add = int(input('choose menu add : '))
+    admin()
     
 def admin_2():
     print('Show data')
@@ -113,6 +120,7 @@ def admin_2():
         elif menu_admin ==4:
             sorted_patient()
         menu_admin = int(input('menu read admin : '))
+    admin()
     
 def update_name():
     show_patient()
@@ -130,6 +138,7 @@ def update_name():
         occupant_index = rooms[room_id]['occupants'].index(old_name)
         rooms[room_id]['occupants'][occupant_index] = name.capitalize()
     print(f"Patient Name with ID {index} Updated to be {name}.")
+
 def update_room():
     show_patient()
     show_room()
@@ -144,18 +153,21 @@ def update_room():
         print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
     else:
         print(f"Room {room_id} Full.")
+
 def update_status():
     show_patient()
     index = int(input('Input Index you want edit: '))
     status = input('New Status of patients :')
     patient[index]['status'] = status.capitalize()
     print(f"status patient with Name {patient[index]['name']} Updated to be {status}.")
+
 def update_disease():
     show_patient()
     index = int(input('Input Index you want edit: '))
     disease = input('New Disease of patients :')
     patient[index]['disease'] = disease.capitalize()
     print(f"disease patient with Nama {patient[index]['name']} Updated to be {disease}.")
+
 def update_class():
     show_room()
     index = int(input('index room: '))
@@ -201,12 +213,14 @@ def admin_3():
         elif update_menu == 5:
             update_class()
         update_menu = int(input('Update menu:'))
+    admin()
     
 def reset_patient_index():
     global patient
     patient = {i+1: info for i, (idx, info) in enumerate(patient.items())}
     print("Index pasien telah diatur ulang.")
     show_patient()
+
 def delete_patient():
     show_patient()
     index = int(input('index patient : '))
@@ -218,6 +232,7 @@ def delete_patient():
     else:
         print("Patient tidak ditemukan.")
     reset_patient_index()
+
 def delete_rooms():
     show_room()
     index = int(input('index room : '))
@@ -238,6 +253,8 @@ def admin_4():
         elif delete_menu == 2:
             delete_rooms()
         delete_menu = int(input('which menu to delete: '))
+    admin()
+
 def admin():
     print('HI ADMIN! Welcome to ADMIN DASHBOARD')
     print('You\'Re Super User Here')
@@ -257,7 +274,6 @@ def admin():
         elif admin_menu == 4:
             admin_4()
         admin_menu = int(input('Admin Menu Choose: '))
-    # main_menu()
 def patient_fam():
     print('WELCOME TO HOSPITAL DASHBOARD')
     print('YOU ONLY CAN FILTER NAME OF THE PATIENT')
