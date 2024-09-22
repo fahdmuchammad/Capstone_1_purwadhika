@@ -61,13 +61,13 @@ def sorted_patient():
         print(f'{index}\t{name}\t{room}\t{patientid}\t{disease:>10}\t{status}\t')
     print('------------------------------------------------------')
 def add_patient():
-    user_id = len(patient)+1
+    pat_id = len(patient)+1
     name = input('nama patient : ')
-    patient_id = name[:3] + str(user_id)
-    penyakit = input('disease')
-    kondisi = input('status patient')
-    patient[user_id] = {"name": name.capitalize(), "room_id": None,"patient_id":patient_id.capitalize(),"disease":penyakit.capitalize(),"status":kondisi.capitalize()}
-    print(f"Patient {name} dengan ID {user_id} berhasil ditambahkan.")
+    patient_id = name[:3] + str(pat_id)
+    penyakit = input('disease :')
+    kondisi = input('status patient :')
+    patient[pat_id] = {"name": name.capitalize(), "room_id": 0,"patient_id":patient_id.capitalize(),"disease":penyakit.capitalize(),"status":kondisi.capitalize()}
+    print(f"Patient {name} dengan ID {pat_id} berhasil ditambahkan.")
     show_patient()
 def add_room():
     room_id = len(rooms)+1
@@ -87,13 +87,13 @@ def admin_1():
     print('1. ADD patient')
     print('2. ADD Room')
     print('0. Back')
-    menu_add = int(input('choose menu add'))
+    menu_add = int(input('choose menu add :'))
     while menu_add != 0:
         if menu_add == 1:
             add_patient()
         elif menu_add == 2:
             add_room()
-        menu_add = int(input('choose menu add'))
+        menu_add = int(input('choose menu add : '))
     
 def admin_2():
     print('Show data')
@@ -118,12 +118,17 @@ def update_name():
     show_patient()
     index = int(input('Input Index you want edit: '))
     name = input('New Name of patients :')
+    old_name = patient[index]['name']
     patient[index]['name'] = name.capitalize()
     if index < 10:
         patient_id = name[:3] + str(0) + str(index)
     else:
         patient_id = name[:3] + str(index)
     patient[index]['patient_id'] = patient_id.capitalize()
+    room_id = patient[index]['room_id']
+    if room_id and old_name in rooms[room_id]['occupants']:
+        occupant_index = rooms[room_id]['occupants'].index(old_name)
+        rooms[room_id]['occupants'][occupant_index] = name.capitalize()
     print(f"Nama patient dengan ID {index} diperbarui menjadi {name}.")
 def update_room():
     show_patient()
@@ -204,7 +209,7 @@ def reset_patient_index():
     show_patient()
 def delete_patient():
     show_patient()
-    index = int(input('index patient'))
+    index = int(input('index patient : '))
     room_id = patient[index]['room_id']
     if room_id:
         rooms[room_id]['occupants'].remove(patient[index]['name'])
@@ -215,7 +220,7 @@ def delete_patient():
     reset_patient_index()
 def delete_rooms():
     show_room()
-    index = int(input('index room'))
+    index = int(input('index room : '))
     if rooms[index]['occupants']:
         print(f"Tidak bisa menghapus Room {index}, masih ada occupant.")
     else:
@@ -226,13 +231,13 @@ def admin_4():
     print('Delete Menu')
     print('1. Delete Patient')
     print('2. Delete Rooms')
-    delete_menu = int(input('which menu to delete:'))
+    delete_menu = int(input('which menu to delete: '))
     while delete_menu != 0:
         if delete_menu == 1:
             delete_patient()
         elif delete_menu == 2:
             delete_rooms()
-        delete_menu = int(input('which menu to delete:'))
+        delete_menu = int(input('which menu to delete: '))
 def admin():
     print('HI ADMIN! Welcome to ADMIN DASHBOARD')
     print('You\'Re Super User Here')
@@ -241,7 +246,7 @@ def admin():
     print('3. Update Data')
     print('4. Delete Data')
     print('0. Main Menu')
-    admin_menu = int(input('Admin Menu Choose:'))
+    admin_menu = int(input('Admin Menu Choose: '))
     while admin_menu!=0:
         if admin_menu == 1:
             admin_1()
@@ -251,7 +256,7 @@ def admin():
             admin_3()
         elif admin_menu == 4:
             admin_4()
-        admin_menu = int(input('Admin Menu Choose:'))
+        admin_menu = int(input('Admin Menu Choose: '))
     # main_menu()
 def patient_fam():
     print('WELCOME TO HOSPITAL DASHBOARD')
@@ -272,10 +277,10 @@ def main_menu():
     print('0. Exit')
     
 main_menu()
-role = int(input('Fill your Role!'))
+role = int(input('Fill your Role! : '))
 while role !=0:
     if role == 1:
         admin()
     if role == 2:
         patient_fam()
-    role = int(input('Fill your Role!'))
+    role = int(input('Fill your Role!: '))
