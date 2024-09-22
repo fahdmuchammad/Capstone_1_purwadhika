@@ -263,9 +263,9 @@ def delete_patient():
                 rooms[room_id]['occupants'].remove(patient[index]['name'])
         del patient[index]
         print(f"Patient with ID {index} Deleted.")
+        reset_patient_index()
     else:
         print("Patient tidak ditemukan.")
-    reset_patient_index()
 
 def delete_rooms():
     show_room()
