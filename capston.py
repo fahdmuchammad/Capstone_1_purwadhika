@@ -18,7 +18,7 @@ rooms = {
     3: {"class":"vvip","max_capacity": 2, "occupants": []}
 }
 def show_patient():
-    print('Index\tNama\truangan\tpatid\tpenyakit\tstatus\t')
+    print('Index\tName\tRoom\tPatid\tDisease\tStatus\t')
     for index ,info in patient.items():
         name = info['name']
         room = info['room_id']
@@ -67,7 +67,7 @@ def add_patient():
     penyakit = input('disease :')
     kondisi = input('status patient :')
     patient[pat_id] = {"name": name.capitalize(), "room_id": 0,"patient_id":patient_id.capitalize(),"disease":penyakit.capitalize(),"status":kondisi.capitalize()}
-    print(f"Patient {name} dengan ID {pat_id} berhasil ditambahkan.")
+    print(f"Patient {name} with ID {pat_id} Success added.")
     show_patient()
 def add_room():
     room_id = len(rooms)+1
@@ -80,7 +80,7 @@ def add_room():
     else:
         kapasitas+=6
     rooms[room_id] = {"class":room_class,"max_capacity": kapasitas, "occupants": []}
-    print(f"Ruangan baru dengan kelas {room_class} dengan ID {room_id} berhasil ditambahkan.")
+    print(f"New Room with class {room_class} with ID {room_id} Success added.")
     show_room()
 def admin_1():
     print('What you wanna add?')
@@ -129,7 +129,7 @@ def update_name():
     if room_id and old_name in rooms[room_id]['occupants']:
         occupant_index = rooms[room_id]['occupants'].index(old_name)
         rooms[room_id]['occupants'][occupant_index] = name.capitalize()
-    print(f"Nama patient dengan ID {index} diperbarui menjadi {name}.")
+    print(f"Patient Name with ID {index} Updated to be {name}.")
 def update_room():
     show_patient()
     show_room()
@@ -141,26 +141,26 @@ def update_room():
     if len(rooms[room_id]['occupants']) < rooms[room_id]['max_capacity']:
         patient[index]['room_id'] = room_id
         rooms[room_id]['occupants'].append(patient[index]['name'])
-        print(f"Patient {patient[index]['name']} dipindahkan ke Room {room_id}.")
+        print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
     else:
-        print(f"Room {room_id} sudah penuh.")
+        print(f"Room {room_id} Full.")
 def update_status():
     show_patient()
     index = int(input('Input Index you want edit: '))
     status = input('New Status of patients :')
     patient[index]['status'] = status.capitalize()
-    print(f"status patient dengan Nama {patient[index]['name']} diperbarui menjadi {status}.")
+    print(f"status patient with Name {patient[index]['name']} Updated to be {status}.")
 def update_disease():
     show_patient()
     index = int(input('Input Index you want edit: '))
     disease = input('New Disease of patients :')
     patient[index]['disease'] = disease.capitalize()
-    print(f"disease patient dengan Nama {patient[index]['name']} diperbarui menjadi {disease}.")
+    print(f"disease patient with Nama {patient[index]['name']} Updated to be {disease}.")
 def update_class():
     show_room()
     index = int(input('index room: '))
     if rooms[index]['occupants']:
-            print(f"Tidak bisa mengubah class Room {index}, masih ada occupants.")
+            print(f"can\'t update class Room {index}, still any occupants.")
     else:
         room_class_up = input('nama kelas : ')
         rooms[index]['class'] = room_class_up
@@ -172,7 +172,7 @@ def update_class():
         else:
             kapasitas+=6
         rooms[index]['max_capacity'] = kapasitas
-        print(f"Class Room {index} berhasil diubah menjadi {room_class_up} dan kapasitas menjadi {kapasitas}.")
+        print(f"Class Room {index} Success Updated to be {room_class_up} and The capacity is {kapasitas}.")
 
 
 def admin_3():
@@ -214,7 +214,7 @@ def delete_patient():
     if room_id:
         rooms[room_id]['occupants'].remove(patient[index]['name'])
         del patient[index]
-        print(f"Patient dengan ID {index} berhasil dihapus.")
+        print(f"Patient with ID {index} Deleted.")
     else:
         print("Patient tidak ditemukan.")
     reset_patient_index()
@@ -222,10 +222,10 @@ def delete_rooms():
     show_room()
     index = int(input('index room : '))
     if rooms[index]['occupants']:
-        print(f"Tidak bisa menghapus Room {index}, masih ada occupant.")
+        print(f"Can\'t delete Room {index}, still any occupants.")
     else:
         del rooms[index]
-        print(f"Room dengan ID {index} berhasil dihapus.")
+        print(f"Room with ID {index} deleted.")
 
 def admin_4():
     print('Delete Menu')
@@ -264,6 +264,7 @@ def patient_fam():
     print('Patient Name : ')
     patient_id=input('Patient id:')
     print(patient_id)
+    print('Name\tROOM\tStatus')
     for index ,info in patient.items():
         if info['patient_id'].lower()==patient_id.lower():
             print(info['name'],'\t',info['room_id'],'\t',info['status'])
