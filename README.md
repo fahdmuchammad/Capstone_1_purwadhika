@@ -2,7 +2,7 @@
 # PROGRAM : DTI DS PURWADHIKA
 # Lecturer : Ilham Candra
 ### Topic : Hospital System
-
+---
 Hospital system
 have 2 dictionary (patient, room)
 patient have name, room, patient_id, disease, status
