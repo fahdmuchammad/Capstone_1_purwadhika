@@ -25,4 +25,4 @@ family only can read
 14. find data by patient_id
 ***
 
-![image](/Users/fahdmuchammad/Documents/GitHub/Capstone_1_purwadhika/test.png "usecase")
+![image](test.png "usecase")
