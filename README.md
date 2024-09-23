@@ -23,4 +23,5 @@ family only can read
 12. del room
 13. new role as family
 14. find data by patient_id
+***
 [image](/Users/fahdmuchammad/Documents/GitHub/Capstone_1_purwadhika/HOSPITAL_MUCHAMMAD FAHD.drawio.png "usecase")
