@@ -46,4 +46,4 @@ Flowchart
 ![image](5-delete.jpg "main")
 
 6. Patient Family find
-![image](6-patient family.jpg "main")
+![image](6-patientfamily.jpg "main")
