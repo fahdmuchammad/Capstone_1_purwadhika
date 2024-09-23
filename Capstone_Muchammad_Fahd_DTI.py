@@ -326,6 +326,7 @@ def patient_fam():
     for index ,info in patient.items():
         if info['patient_id'].lower()==patient_id.lower():
             print(info['name'],'\t',info['room_id'],'\t',info['status'])
+            print('--------------------------')
             break
     else:
         print(f'No data have name : {patient_id}')
