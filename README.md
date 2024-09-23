@@ -9,10 +9,10 @@ patient have name, room, patient_id, disease, status
 room have class, max capacity, occupant(list)
 have 2 actor (family and admin) admin was super user
 family only can read
-1. add patient 
-2. add room Hospital
-3. display patient
-4. display room
+1. add patient : add new data patient
+2. add room Hospital : add new room in hospital
+3. display patient : show all patient
+4. display room : show all room in hospital include occupant
 5. find patient by name
 6. sort patient by anything
 7. update name new data patient

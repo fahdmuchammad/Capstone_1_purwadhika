@@ -43,7 +43,7 @@ def find_patient():
     print('Patient Name : ')
     patient_nama=input('Patient name:')
     print(patient_nama)
-    print('Index\tNama\truangan\tpatid\tpenyakit\tstatus\t')
+    print('Index\tName\tRoom\tpatid\tDisease\tstatus\t')
     for index ,info in patient.items():
         if info['name'].lower()==patient_nama.lower():
             print(index,'\t', info['name'],'\t',info['room_id'],'\t',info['patient_id'],'\t',info['disease'],'\t',info['status'])
