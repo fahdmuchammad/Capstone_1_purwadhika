@@ -27,3 +27,23 @@ family only can read
 Usecase: 
 ---
 ![image](test.png "usecase")
+
+Flowchart
+---
+1. Main Guide
+![image](1-main.jpg "main")
+
+2. Add Data
+![image](2-add.jpg "main")
+
+3. Read Data
+![image](3-read.jpg "main")
+
+4. Update Data
+![image](4-update.jpg "main")
+
+5. Delete Data
+![image](5-delete.jpg "main")
+
+6. Patient Family find
+![image](6-patient family.jpg "main")
