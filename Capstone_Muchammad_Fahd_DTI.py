@@ -151,14 +151,17 @@ def update_room():
     if index in patient:
         room_id = int(input('update room id : '))
         current_room_id = patient[index]['room_id']
-        if current_room_id:
-            rooms[current_room_id]['occupants'].remove(patient[index]['name'])
-        if len(rooms[room_id]['occupants']) < rooms[room_id]['max_capacity']:
-            patient[index]['room_id'] = room_id
-            rooms[room_id]['occupants'].append(patient[index]['name'])
-            print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
+        if room_id in rooms:
+            if current_room_id:
+                rooms[current_room_id]['occupants'].remove(patient[index]['name'])
+            if len(rooms[room_id]['occupants']) < rooms[room_id]['max_capacity']:
+                patient[index]['room_id'] = room_id
+                rooms[room_id]['occupants'].append(patient[index]['name'])
+                print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
+            else:
+                print(f"Room {room_id} Full.")
         else:
-            print(f"Room {room_id} Full.")
+            print(f'{room_id} no index ')
         show_room()
     else:
         print(f'{index} Not Found')
