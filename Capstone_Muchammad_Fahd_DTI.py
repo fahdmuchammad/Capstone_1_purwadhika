@@ -1,5 +1,6 @@
 # Muchammad Fahd Ishamuddin DTI DS24 #21
 #HOSPITAL SYSTEM
+# Admin Menu Choose meaning on admin() fill 0 until change to be "fill your role!: to reset"
 patient = {
     1: {"name": "Zainal", "room_id": 1,"patient_id":"Zai01","disease":"Stomach","status":"Good"},
     2: {"name": "Abidin", "room_id": 1,"patient_id":"Abi02","disease":"Gerd","status":"Bad"},
@@ -149,22 +150,24 @@ def update_room():
     show_room()
     index = int(input('Input Index you want edit: '))
     if index in patient:
-        room_id = int(input('update room id : '))
+        room_id = int(input('Update room ID: '))
         current_room_id = patient[index]['room_id']
+
         if room_id in rooms:
-            if current_room_id:
-                rooms[current_room_id]['occupants'].remove(patient[index]['name'])
             if len(rooms[room_id]['occupants']) < rooms[room_id]['max_capacity']:
+                if current_room_id:
+                    rooms[current_room_id]['occupants'].remove(patient[index]['name'])
                 patient[index]['room_id'] = room_id
                 rooms[room_id]['occupants'].append(patient[index]['name'])
-                print(f"Patient {patient[index]['name']} Moved to Room {room_id}.")
+                print(f"Patient {patient[index]['name']} moved to Room {room_id}.")
             else:
-                print(f"Room {room_id} Full.")
+                print(f"Room {room_id} is full. Patient remains in Room {current_room_id}.")
         else:
-            print(f'{room_id} no index ')
+            print(f"Room {room_id} does not exist.")
+        
         show_room()
     else:
-        print(f'{index} Not Found')
+        print(f"Patient with index {index} not found.")
     
 
 def update_status():
@@ -339,4 +342,4 @@ while role !=0:
         patient_fam()
     role = int(input('Fill your Role!: '))
 
-# Admin Menu Choose meaning on admin() fill 0 until change to be "fill your role!:"
+# Admin Menu Choose meaning on admin() fill 0 until change to be "fill your role!: to reset"
