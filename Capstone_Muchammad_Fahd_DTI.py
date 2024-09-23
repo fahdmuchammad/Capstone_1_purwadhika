@@ -100,8 +100,8 @@ def admin_1():
             add_patient()
         elif menu_add == 2:
             add_room()
+        admin_1()
         menu_add = int(input('choose menu add : '))
-    admin()
     
 def admin_2():
     print('Show data')
@@ -120,8 +120,8 @@ def admin_2():
             find_patient()
         elif menu_admin ==4:
             sorted_patient()
+        admin_2()
         menu_admin = int(input('menu read admin : '))
-    admin()
     
 def update_name():
     show_patient()
@@ -243,8 +243,8 @@ def admin_3():
             update_disease()
         elif update_menu == 5:
             update_class()
+        admin_3()
         update_menu = int(input('Update menu:'))
-    admin()
     
 def reset_patient_index():
     global patient
@@ -292,8 +292,8 @@ def admin_4():
             delete_patient()
         elif delete_menu == 2:
             delete_rooms()
+        admin_4()
         delete_menu = int(input('which menu to delete: '))
-    admin()
 
 def admin():
     print('HI ADMIN! Welcome to ADMIN DASHBOARD')
@@ -313,7 +313,9 @@ def admin():
             admin_3()
         elif admin_menu == 4:
             admin_4()
+        admin()
         admin_menu = int(input('Admin Menu Choose: '))
+
 def patient_fam():
     print('WELCOME TO HOSPITAL DASHBOARD')
     print('YOU ONLY CAN FILTER NAME OF THE PATIENT')
@@ -327,6 +329,7 @@ def patient_fam():
             break
     else:
         print(f'No data have name : {patient_id}')
+
 def main_menu():
     print('What\'s Your Role?')
     print('1. ADMIN')
@@ -340,6 +343,7 @@ while role !=0:
         admin()
     if role == 2:
         patient_fam()
+    main_menu()
     role = int(input('Fill your Role!: '))
-
+    
 # Admin Menu Choose meaning on admin() fill 0 until change to be "fill your role!: to reset"
