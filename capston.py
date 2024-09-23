@@ -335,3 +335,5 @@ while role !=0:
     if role == 2:
         patient_fam()
     role = int(input('Fill your Role!: '))
+
+# Admin Menu Choose meaning on admin() fill 0 until change to be "fill your role!:"
