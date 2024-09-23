@@ -1,5 +1,5 @@
 # Muchammad Fahd Ishamuddin DTI DS24 #21
-#HOSPITAL SYSTEM
+# HOSPITAL SYSTEM
 # Admin Menu Choose meaning on admin() fill 0 until change to be "fill your role!: to reset"
 patient = {
     1: {"name": "Zainal", "room_id": 1,"patient_id":"Zai01","disease":"Stomach","status":"Good"},
