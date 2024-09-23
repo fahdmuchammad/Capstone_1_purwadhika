@@ -10,7 +10,7 @@ room have class, max capacity, occupant(list)
 have 2 actor (family and admin) admin was super user
 family only can read
 1. add patient 
-2. add room rumah sakit m
+2. add room Hospital
 3. display patient
 4. display room
 5. find patient by name
